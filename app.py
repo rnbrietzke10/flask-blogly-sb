@@ -24,3 +24,8 @@ def list_users():
 @app.route('/')
 def base():
     return redirect('/users')
+
+
+@app.route('/users/new')
+def add_new_user():
+    return render_template('new_user_form.html')
