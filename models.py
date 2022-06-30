@@ -16,3 +16,9 @@ class User(db.Model):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     image_url = db.Column(db.String(500), default='./assets/sincerely-media-vcF5y2Edm6A-unsplash.jpg')
+
+    def __repr__(self):
+        """Show info about pet."""
+
+        u = self
+        return f"<User{u.id} {u.first_name} {u.last_name} {u.image_url}>"

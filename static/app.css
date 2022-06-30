@@ -16,7 +16,7 @@
 
 #content {
   margin: 25px;
-  background-color: bisque;
+
   min-width: 300px;
   padding: 25px;
   border-radius: 15px;
@@ -52,4 +52,26 @@ input[type="text"] {
 .btn.add {
   background-color: #28a746;
   border: none;
+}
+
+/* User Detail page */
+
+.user-info-container {
+  width: 400px;
+  height: 200px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.user-img {
+  height: 100px;
+  border-radius: 5px;
+}
+
+.edit-user {
+  background-color: #007cff;
+}
+
+.delete-user {
+  background-color: #dc3545;
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block title %}Blogly Users{% endblock %} {% block
+page_title %}User Detail Page{% endblock %} {% block content %}
+
+<div class="user-info-container">
+  <img src="{{user.image_url}}" alt="Users image" class="user-img" />
+  <div class="user">
+    <h2>{{user.first_name}} {{user.last_name}}</h2>
+    <a href="/users/{{user.id}}/edit" class="btn edit-user">Edit</a>
+    <a href="/users/{{user.id}}/delete" class="btn delete-user">Delete</a>
+  </div>
+</div>
+
+{% endblock %}

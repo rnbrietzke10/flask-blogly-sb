@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block title %}Blogly Users{% endblock %} {% block
-page_title %}Create a user{% endblock %} {% block content %}
+page_title %}User Edit Page{% endblock %} {% block content %}
 
-<form action="/users/new" method="post">
+<form action="/users/{{user.id}}/edit" method="post">
   <div class="input-container">
     <label for="firstName">First Name</label>
     <input
@@ -9,6 +9,7 @@ page_title %}Create a user{% endblock %} {% block content %}
       name="firstName"
       id="firstName"
       placeholder="Enter a first name"
+      value="{{user.first_name}}"
     />
   </div>
 
@@ -19,6 +20,7 @@ page_title %}Create a user{% endblock %} {% block content %}
       name="lastName"
       id="lastName"
       placeholder="Enter a last name"
+      value="{{user.last_name}}"
     />
   </div>
 
@@ -29,9 +31,12 @@ page_title %}Create a user{% endblock %} {% block content %}
       name="imageUrl"
       id="imageUrl"
       placeholder="Provide an image of this user"
+      value="{{user.image_url}}"
     />
   </div>
 
-  <button class="btn add">Add</button>
+  <a href="/users/{{user.id}}" class="btn cancel-ßedit">Cancel</a>
+  <button class="btn add">Save</button>
 </form>
+
 {% endblock %}
