@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block title %}Blogly Users{% endblock %} {% block
+page_title %}Create Post for {{user.first_name}} {{user.last_name}} {% endblock
+%} {% block content %}
+
+<form action="/users/{{user.id}}/posts/new" method="post">
+  <div class="input-container">
+    <label for="post-title">Title</label>
+    <input type="text" name="post-title" id="post-title" />
+  </div>
+
+  <div class="input-container">
+    <label for="post-content">Content</label>
+    <textarea name="post-content" id="" cols="30" rows="10"></textarea>
+  </div>
+
+  <button class="btn add">Add</button>
+</form>
+{% endblock %}

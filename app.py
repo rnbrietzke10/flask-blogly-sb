@@ -82,9 +82,23 @@ def delete_user(user_id):
     return redirect('/users')
 
 
+@app.route('/users/<int:user_id>/posts/new')
+def new_post_form(user_id):
+    user = User.query.get(user_id)
+    return render_template('new_post_form.html', user=user)
 
 
-# new_post_form.html
+@app.route('/users/<int:user_id>/posts/new', methods=["POST"])
+def add_post(user_id):
+
+    post_title = request.form['post-title']
+    post_content = request.form['post-content']
+    new_post = Post(title=post_title, content=post_content, user_id=user_id)
+
+    db.session.add(new_post)
+    db.session.commit()
+
+    return redirect(f'/users/{user_id}')
 
 
 @app.route('/posts/<int:post_id>')
@@ -94,4 +108,29 @@ def show_user_post(post_id):
     return render_template('post_detail_page.html', post=post)
 
 
+@app.route('/posts/<int:post_id>/edit')
+def edit_post_form(post_id):
+    post = Post.query.get(post_id)
 
+    return render_template('edit_post_page.html', post=post)
+
+@app.route('/posts/<int:post_id>/edit', methods=["POST"])
+def save_post_edit(post_id):
+    post = Post.query.get(post_id)
+    post.title = request.form['post-title']
+    post.content = request.form['post-content']
+
+    db.session.commit()
+
+    return redirect(f'/posts/{post_id}')
+
+
+@app.route('/posts/<int:post_id>/delete')
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    user_id = post.user_id
+    print("USER ID: ", user_id)
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(f'/users/{user_id}')
