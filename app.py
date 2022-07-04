@@ -142,3 +142,9 @@ def list_tags():
     tags = Tag.query.all()
     print(tags)
     return render_template("list_tags.html", tags=tags)
+
+
+@app.route('/tags/<int:tag_id>')
+def add_tag_form(tag_id):
+    tag = Tag.query.get(tag_id)
+    return render_template('tag_detail_page.html', tag=tag)
