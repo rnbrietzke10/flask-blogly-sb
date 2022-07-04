@@ -57,7 +57,6 @@ def user_detail_page(user_id):
 @app.route('/users/<int:user_id>/edit')
 def edit_user_info_page(user_id):
     user = User.query.get(user_id)
-    print(user)
 
     return render_template('edit_user_page.html', user=user)
 
@@ -134,3 +133,12 @@ def delete_post(post_id):
     db.session.commit()
 
     return redirect(f'/users/{user_id}')
+
+
+# Tag routes
+
+@app.route('/tags')
+def list_tags():
+    tags = Tag.query.all()
+    print(tags)
+    return render_template("list_tags.html", tags=tags)

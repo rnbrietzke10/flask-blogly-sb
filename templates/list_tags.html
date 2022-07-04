@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block title %}Blogly Users{% endblock %} {% block
+page_title %}Tags List:{% endblock %} {% block content %}
+
+<ul>
+  {% for tag in tags %}
+  <li>
+    <a href="#">{{tag.name}}</a>
+  </li>
+  {% endfor %}
+</ul>
+<a href="/tags/new" class="btn">Add Tag</a>
+{% endblock %}

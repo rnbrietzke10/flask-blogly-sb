@@ -61,7 +61,9 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), unique=True)
 
-
+    def __repr__(self):
+        """Show info about tag."""
+        return f"<Tag {self.id} {self.name} >"
 
 class PostTag(db.Model):
     """Many to many table between posts table and tags table"""
