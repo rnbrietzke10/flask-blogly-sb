@@ -3,10 +3,21 @@ page_title %}User Detail Page{% endblock %} {% block content %}
 
 <div class="user-info-container">
   <img src="{{user.image_url}}" alt="Users image" class="user-img" />
-  <div class="user">
+  <div class="user-info">
     <h2>{{user.first_name}} {{user.last_name}}</h2>
-    <a href="/users/{{user.id}}/edit" class="btn edit-user">Edit</a>
-    <a href="/users/{{user.id}}/delete" class="btn delete-user">Delete</a>
+    <a href="/users/{{user.id}}/edit" class="btn edit">Edit</a>
+    <a href="/users/{{user.id}}/delete" class="btn delete">Delete</a>
+    <div class="user-posts">
+      <h2>Posts</h2>
+      {% if posts %}
+      <ul class="post-list">
+        {% for post in posts %}
+        <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    <a href=" /users/{{user.id}}/posts/new" class="btn add">Add Post</a>
   </div>
 </div>
 

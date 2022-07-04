@@ -2,7 +2,7 @@
 
 from flask import Flask, redirect, request, render_template, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User
+from models import db, connect_db, User, Post
 
 app = Flask(__name__)
 
@@ -49,7 +49,9 @@ def user_detail_page(user_id):
     """Get user by id and render template with there information"""
 
     user = User.query.get_or_404(user_id)
-    return render_template('user_detail_page.html', user=user)
+    posts = Post.query.filter(Post.user_id == user_id)
+
+    return render_template('user_detail_page.html', user=user, posts=posts)
 
 
 @app.route('/users/<int:user_id>/edit')
@@ -78,3 +80,18 @@ def delete_user(user_id):
     db.session.commit()
 
     return redirect('/users')
+
+
+
+
+# new_post_form.html
+
+
+@app.route('/posts/<int:post_id>')
+def show_user_post(post_id):
+    post = Post.query.get(post_id)
+
+    return render_template('post_detail_page.html', post=post)
+
+
+

@@ -11,7 +11,6 @@
   font-family: Arial, Helvetica, sans-serif;
   margin: 50px;
   height: 100vh;
-  width: 100%;
 }
 
 #content {
@@ -57,21 +56,50 @@ input[type="text"] {
 /* User Detail page */
 
 .user-info-container {
-  width: 400px;
-  height: 200px;
+  width: 600px;
+  height: 400px;
   display: flex;
   justify-content: space-around;
 }
 
 .user-img {
-  height: 100px;
+  height: 200px;
   border-radius: 5px;
 }
+.user-info {
+  height: 200px;
+}
 
-.edit-user {
+.edit {
   background-color: #007cff;
 }
 
-.delete-user {
+.delete {
   background-color: #dc3545;
 }
+
+.user-posts {
+  margin-top: 15px;
+}
+
+.post-list {
+  margin: 10px 0 0 25px;
+}
+
+/* Post Details Page */
+.post-info-container {
+  display: flex;
+  flex-direction: column;
+
+  /* width: 60%; */
+}
+
+.post-content {
+  width: 400px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* .post-btn {
+  width: 20px;
+} */
