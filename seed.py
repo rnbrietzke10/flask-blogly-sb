@@ -1,6 +1,6 @@
 """Seed file to make sample data for db."""
 
-from models import User, Post, db
+from models import User, Post, Tag, db, PostTag
 from app import app
 import datetime
 
@@ -21,7 +21,22 @@ rain = User(first_name="Rain", last_name="Phoenix", image_url="https://images.un
 db.session.add_all([river, summer, joaquin, octavia, larry, kurt, rain])
 
 db.session.commit()
-post_content= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+post_content= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+# Add a bunch of tags
+
+awesome = Tag(name='awesome')
+css = Tag(name="CSS3")
+lol = Tag(name="LOL")
+js = Tag(name="JavaScript")
+data = Tag(name="Databases")
+p = Tag(name="Python")
+f = Tag(name="Flask")
+psql = Tag(name="PostgreSQL")
+
+db.session.add_all([awesome, lol, js, data, f, p, psql])
+db.session.commit()
+
+
 
 # Make a bunch of posts
 p1 = Post(title="Learn about CSS", content=post_content, user_id=1)
@@ -34,4 +49,14 @@ db.session.add_all([p1, p2, p3, p4, p5])
 
 db.session.commit()
 
+
+p1.tag.append(awesome)
+p1.tag.append(css)
+
+p2.tag.append(p)
+
+
+db.session.add_all([p1, p2])
+
+db.session.commit()
 
