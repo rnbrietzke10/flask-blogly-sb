@@ -47,7 +47,11 @@ input[type="text"] {
   border-radius: 5px;
   border: 1px solid rgba(128, 128, 128, 0.6);
 }
-
+button {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+}
 .btn.add {
   background-color: #28a746;
   border: none;

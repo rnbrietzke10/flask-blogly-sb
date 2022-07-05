@@ -128,7 +128,7 @@ def save_post_edit(post_id):
 def delete_post(post_id):
     post = Post.query.get(post_id)
     user_id = post.user_id
-    print("USER ID: ", user_id)
+
     db.session.delete(post)
     db.session.commit()
 
@@ -145,6 +145,49 @@ def list_tags():
 
 
 @app.route('/tags/<int:tag_id>')
-def add_tag_form(tag_id):
+def tag_detail_page(tag_id):
     tag = Tag.query.get(tag_id)
+
     return render_template('tag_detail_page.html', tag=tag)
+
+@app.route('/tags/new')
+def new_tag_form():
+
+
+    return render_template('new_tag_form.html')
+
+@app.route('/tags/new', methods=["POST"])
+def add_tag():
+    tag_name = request.form["tag-name"]
+    new_tag = Tag(name=tag_name)
+
+    db.session.add(new_tag)
+    db.session.commit()
+
+    return redirect("/tags")
+
+
+@app.route('/tags/<int:tag_id>/edit')
+def edit_tag_form(tag_id):
+    tag = Tag.query.get(tag_id)
+
+    return render_template("edit_tag_page.html", tag=tag)
+
+
+@app.route('/tags/<int:tag_id>/edit', methods=["POST"])
+def save_tag_edit(tag_id):
+    tag = Tag.query.get(tag_id)
+    tag.name = request.form["tag-name"]
+
+    db.session.commit()
+
+    return redirect('/tags')
+
+
+@app.route('/tags/<int:tag_id>/delete')
+def delete_tag(tag_id):
+    tag = Tag.query.get(tag_id)
+    db.session.delete(tag)
+    db.session.commit()
+    return redirect("/tags")
+

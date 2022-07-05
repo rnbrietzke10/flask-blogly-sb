@@ -3,6 +3,13 @@ page_title %}Tags Detail Page{% endblock %} {% block content %}
 
 <div class="post-info-container">
   <h2>{{tag.name}}</h2>
+  {% if tag.posts != [] %}
+  <ul>
+    {% for post in tag.posts %}
+    <li>{{post.title}}</li>
+    {% endfor%}
+  </ul>
+  {% endif %}
 
   <div class="btn-container">
     <a href="/tags/{{tag.id}}/edit" class="btn edit">Edit</a>
