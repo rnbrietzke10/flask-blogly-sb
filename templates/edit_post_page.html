@@ -18,9 +18,25 @@ page_title %}Edit Post Page{% endblock %} {% block content %}
 {{post.content}}</textarea
     >
   </div>
-
-  <a href="/posts/{{post.id}}" class="btn cancel">Cancel</a>
-  <button class="btn add">Save</button>
+  <!-- end original -->
+  <div class="tag-addbtn-container">
+    <div class="tags-checkbox-container">
+      {% for tag in tags %} <input type="checkbox" id="tag{{tag.id}}"
+      name="added-tags" value="{{tag.name}}" {{ "checked" if tag in post_tags }}
+      />
+      <label for="tag{{tag.id}}">{{tag.name}}</label><br />
+      {% endfor %}
+    </div>
+    <div class="post-btn-container">
+      <a href="/posts/{{post.id}}"
+        ><button class="btn cancel" type="button">Cancel</button></a
+      >
+      <button class="btn add">Add</button>
+    </div>
+  </div>
+  <!-- Below original -->
 </form>
 
 {% endblock %}
+
+<!-- {{ "checked" if proxy_mode == 0 }} -->

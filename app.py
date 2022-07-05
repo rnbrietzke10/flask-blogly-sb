@@ -95,7 +95,7 @@ def add_post(user_id):
     post_content = request.form['post-content']
     new_post = Post(title=post_title, content=post_content, user_id=user_id)
     tags = request.form.getlist("added-tags")
-    print(tags)
+
     if tags:
         for tag in tags:
             add_tag = Tag.query.filter_by(name=tag).first()
@@ -119,15 +119,26 @@ def show_user_post(post_id):
 @app.route('/posts/<int:post_id>/edit')
 def edit_post_form(post_id):
     post = Post.query.get(post_id)
+    tags = Tag.query.all()
+    post_tags = post.tag
+    print(post.tag)
 
-    return render_template('edit_post_page.html', post=post)
+    return render_template('edit_post_page.html', post=post, tags=tags, post_tags=post_tags)
 
 @app.route('/posts/<int:post_id>/edit', methods=["POST"])
 def save_post_edit(post_id):
     post = Post.query.get(post_id)
     post.title = request.form['post-title']
     post.content = request.form['post-content']
+    tags = request.form.getlist("added-tags")
+    post.tag = []
 
+    if tags:
+        for tag in tags:
+            add_tag = Tag.query.filter_by(name=tag).first()
+            post.tag.append(add_tag)
+
+    db.session.add(post)
     db.session.commit()
 
     return redirect(f'/posts/{post_id}')
