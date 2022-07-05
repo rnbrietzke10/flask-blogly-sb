@@ -12,7 +12,24 @@ page_title %}Create Post for {{user.first_name}} {{user.last_name}} {% endblock
     <label for="post-content">Content</label>
     <textarea name="post-content" id="" cols="30" rows="10"></textarea>
   </div>
-
-  <button class="btn add">Add</button>
+  <div class="tag-addbtn-container">
+    <div class="tags-checkbox-container">
+      {% for tag in tags %}
+      <input
+        type="checkbox"
+        id="tag{{tag.id}}"
+        name="added-tags"
+        value="{{tag.name}}"
+      />
+      <label for="tag{{tag.id}}">{{tag.name}}</label><br />
+      {% endfor %}
+    </div>
+    <div class="post-btn-container">
+      <a href="/users/{{user.id}}"
+        ><button class="btn cancel" type="button">Cancel</button></a
+      >
+      <button class="btn add">Add</button>
+    </div>
+  </div>
 </form>
 {% endblock %}

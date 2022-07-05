@@ -84,7 +84,8 @@ def delete_user(user_id):
 @app.route('/users/<int:user_id>/posts/new')
 def new_post_form(user_id):
     user = User.query.get(user_id)
-    return render_template('new_post_form.html', user=user)
+    tags = Tag.query.all()
+    return render_template('new_post_form.html', user=user, tags=tags)
 
 
 @app.route('/users/<int:user_id>/posts/new', methods=["POST"])
@@ -93,6 +94,12 @@ def add_post(user_id):
     post_title = request.form['post-title']
     post_content = request.form['post-content']
     new_post = Post(title=post_title, content=post_content, user_id=user_id)
+    tags = request.form.getlist("added-tags")
+    print(tags)
+    if tags:
+        for tag in tags:
+            add_tag = Tag.query.filter_by(name=tag).first()
+            new_post.tag.append(add_tag)
 
     db.session.add(new_post)
     db.session.commit()
@@ -100,6 +107,8 @@ def add_post(user_id):
     return redirect(f'/users/{user_id}')
 
 
+
+# USER POST ROUTES
 @app.route('/posts/<int:post_id>')
 def show_user_post(post_id):
     post = Post.query.get(post_id)
